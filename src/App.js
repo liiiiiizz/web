@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [menuItems, setMenuItems] = useState([
+  const [breakfastMenu, setBreakfastItems] = useState([
     {
       id: 1,
       name: 'БОРЩ С ГОВЯДИНОЙ',
@@ -29,6 +29,44 @@ function App() {
     },
     // Добавьте другие блюда в массив с изображениями
   ]);
+  const [lunchMenu, setLunchItems] = useState([
+    {
+      id: 4,
+      name: 'БОРЩ С ГОВЯДИНОЙ',
+      price: '319 руб.',
+      ingredients: 'Говядина, свекла, капуста, картофель, морковь, томатная паста, лук репчатый, сметана, укроп',
+      kg: '120 г',
+      image: 'https://regions.shoko.ru/upload/resize_cache/s1/fit_70_700x700/iblock/5f8/5f834b96220b22221e83c7095b4c8e53.jpg',
+    },
+    {
+      id: 5,
+      name: 'ОСЕННИЙ САЛАТ С ПЕЧЁНОЙ ТЫКВОЙ И СВЁКЛОЙ',
+      price: '410 руб.',
+      ingredients: 'Запеченная тыква, свекла отварная, сыр брынза, айсберг, рукола, грецкие орехи, горчичный соус, соус песто, крем бальзамик',
+      kg: '120 г',
+      image: 'https://regions.shoko.ru/upload/resize_cache/s1/fit_70_700x700/iblock/3f1/3f19f602a1d3e06c7f1c793e909f0c49.jpg',
+    },
+    {
+      id: 6,
+      name: '«ЦЕЗАРЬ» С КУРИЦЕЙ',
+      price: '450 руб.',
+      ingredients: 'Куриная грудка, томаты черри, айсберг, крутоны с паприкой, пармезан, соус цезарь (анчоусы, масло оливкововое, подсолнечное, горчица, яичный желток)',
+      kg: '120 г',
+      image: 'https://regions.shoko.ru/upload/resize_cache/s1/fit_70_700x700/iblock/ad5/ad55131669f50ee79951822372548e25.jpg',
+    },
+    // Добавьте другие блюда в массив с изображениями
+  ]);
+
+  const [selectedMenu, setSelectedMenu] = useState(breakfastMenu);
+
+  const handleMenuChange = (menuType) => {
+    if (menuType === 'breakfast') {
+      setSelectedMenu(breakfastMenu);
+    } else if (menuType === 'lunch') {
+      setSelectedMenu(lunchMenu);
+    }
+  };
+
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -57,7 +95,7 @@ function App() {
             </header>
       <main>
         <ul className="menu">
-          {menuItems.map((item) => (
+          {selectedMenu.map((item) => (
             <li key={item.id} onClick={() => handleItemClick(item.id)}>
               <h3>{item.name}</h3>
               <p className="price">{item.price}</p>
